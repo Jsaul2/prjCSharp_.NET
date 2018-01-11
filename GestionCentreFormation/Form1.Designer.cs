@@ -28,25 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.LstThemes = new System.Windows.Forms.DataGridView();
+            this.LstFormations = new System.Windows.Forms.DataGridView();
             this.CmdAjouter = new System.Windows.Forms.Button();
             this.CmdModifier = new System.Windows.Forms.Button();
             this.CmdSupprimer = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.LstThemes)).BeginInit();
+            this.CmdSupprimerLot = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.LstFormations)).BeginInit();
             this.SuspendLayout();
             // 
-            // LstThemes
+            // LstFormations
             // 
-            this.LstThemes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.LstThemes.Location = new System.Drawing.Point(13, 13);
-            this.LstThemes.Name = "LstThemes";
-            this.LstThemes.Size = new System.Drawing.Size(878, 225);
-            this.LstThemes.TabIndex = 0;
-            this.LstThemes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.LstThemes_CellContentClick);
+            this.LstFormations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.LstFormations.Location = new System.Drawing.Point(13, 13);
+            this.LstFormations.Name = "LstFormations";
+            this.LstFormations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.LstFormations.Size = new System.Drawing.Size(878, 225);
+            this.LstFormations.TabIndex = 0;
+            this.LstFormations.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.LstFormations_CellContentClick);
             // 
             // CmdAjouter
             // 
-            this.CmdAjouter.Location = new System.Drawing.Point(333, 242);
+            this.CmdAjouter.Location = new System.Drawing.Point(281, 244);
             this.CmdAjouter.Name = "CmdAjouter";
             this.CmdAjouter.Size = new System.Drawing.Size(75, 23);
             this.CmdAjouter.TabIndex = 1;
@@ -56,7 +58,7 @@
             // 
             // CmdModifier
             // 
-            this.CmdModifier.Location = new System.Drawing.Point(414, 242);
+            this.CmdModifier.Location = new System.Drawing.Point(362, 244);
             this.CmdModifier.Name = "CmdModifier";
             this.CmdModifier.Size = new System.Drawing.Size(75, 23);
             this.CmdModifier.TabIndex = 2;
@@ -66,7 +68,7 @@
             // 
             // CmdSupprimer
             // 
-            this.CmdSupprimer.Location = new System.Drawing.Point(495, 242);
+            this.CmdSupprimer.Location = new System.Drawing.Point(443, 244);
             this.CmdSupprimer.Name = "CmdSupprimer";
             this.CmdSupprimer.Size = new System.Drawing.Size(75, 23);
             this.CmdSupprimer.TabIndex = 3;
@@ -74,28 +76,41 @@
             this.CmdSupprimer.UseVisualStyleBackColor = true;
             this.CmdSupprimer.Click += new System.EventHandler(this.CmdSupprimer_Click);
             // 
+            // CmdSupprimerLot
+            // 
+            this.CmdSupprimerLot.Location = new System.Drawing.Point(524, 244);
+            this.CmdSupprimerLot.Name = "CmdSupprimerLot";
+            this.CmdSupprimerLot.Size = new System.Drawing.Size(78, 23);
+            this.CmdSupprimerLot.TabIndex = 4;
+            this.CmdSupprimerLot.Text = "SupprimerLot";
+            this.CmdSupprimerLot.UseVisualStyleBackColor = true;
+            this.CmdSupprimerLot.Click += new System.EventHandler(this.CmdSupprimerLot_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(903, 277);
+            this.Controls.Add(this.CmdSupprimerLot);
             this.Controls.Add(this.CmdSupprimer);
             this.Controls.Add(this.CmdModifier);
             this.Controls.Add(this.CmdAjouter);
-            this.Controls.Add(this.LstThemes);
+            this.Controls.Add(this.LstFormations);
             this.Name = "Form1";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.LstThemes)).EndInit();
+            this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.LstFormations)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView LstThemes;
+        private System.Windows.Forms.DataGridView LstFormations;
         private System.Windows.Forms.Button CmdAjouter;
         private System.Windows.Forms.Button CmdModifier;
         private System.Windows.Forms.Button CmdSupprimer;
+        private System.Windows.Forms.Button CmdSupprimerLot;
     }
 }
 
