@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="58d74a053c75412aa52ebf410b5a08f3" Name="Diagram1">
+        <EntityTypeShape EntityType="FormationModel.Civilite" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FormationModel.Client" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FormationModel.Commercial" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FormationModel.DemandeClient" Width="1.5" PointX="10.5" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FormationModel.Formateur" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FormationModel.Formation" Width="1.5" PointX="8.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FormationModel.SecteurActivite" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FormationModel.SessionFormation" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FormationModel.Stagiaire" Width="1.5" PointX="7.5" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FormationModel.Stagiaire2SessionFormation" Width="1.5" PointX="9.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FormationModel.Theme" Width="1.5" PointX="6" PointY="14.625" IsExpanded="true" />
+        <AssociationConnector Association="FormationModel.FK_CiviliteCommercial" ManuallyRouted="false" />
+        <AssociationConnector Association="FormationModel.FK_CiviliteFormateur" ManuallyRouted="false" />
+        <AssociationConnector Association="FormationModel.FK_CiviliteStagiaire1" ManuallyRouted="false" />
+        <AssociationConnector Association="FormationModel.FK_CommercialClient" ManuallyRouted="false" />
+        <AssociationConnector Association="FormationModel.FK_DemandeClientClient" ManuallyRouted="false" />
+        <AssociationConnector Association="FormationModel.FK_SecteurActiviteClient" ManuallyRouted="false" />
+        <AssociationConnector Association="FormationModel.FK_StagiaireClient" ManuallyRouted="false" />
+        <AssociationConnector Association="FormationModel.FK_SessionFormationCommercial" ManuallyRouted="false" />
+        <AssociationConnector Association="FormationModel.FK_DemandeClientFormation" ManuallyRouted="false" />
+        <AssociationConnector Association="FormationModel.FK_FormateurSessionFormation" ManuallyRouted="false" />
+        <AssociationConnector Association="FormationModel.FK_FormationSessionFormation" ManuallyRouted="false" />
+        <AssociationConnector Association="FormationModel.FK_ThemeFormation" ManuallyRouted="false" />
+        <AssociationConnector Association="FormationModel.FK_SessionFormationStagiaire_Stagiaire" ManuallyRouted="false" />
+        <AssociationConnector Association="FormationModel.Formateur2Formation" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

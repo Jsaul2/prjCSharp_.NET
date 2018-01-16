@@ -1,0 +1,942 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FormationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Civilite">
+          <Key>
+            <PropertyRef Name="Identifiant" />
+          </Key>
+          <Property Name="Identifiant" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LibelleCourt" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LibelleLong" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Identifiant" />
+          </Key>
+          <Property Name="Identifiant" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Reference" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RaisonSociale" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Adresse" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CodePostal" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ville" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UrlSiteWeb" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MotDePasse" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdCommercial" Type="int" Nullable="false" />
+          <Property Name="IdSecteurActivite" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Commercial">
+          <Key>
+            <PropertyRef Name="Identifiant" />
+          </Key>
+          <Property Name="Identifiant" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomUtilisateur" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MotDePasse" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prenom" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdCivilite" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DemandeClient">
+          <Key>
+            <PropertyRef Name="Identifiant" />
+          </Key>
+          <Property Name="Identifiant" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateDemande" Type="datetime" Nullable="false" />
+          <Property Name="DateTraitement" Type="datetime" />
+          <Property Name="IdFormation" Type="int" Nullable="false" />
+          <Property Name="IdClient" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Formateur">
+          <Key>
+            <PropertyRef Name="Identifiant" />
+          </Key>
+          <Property Name="Identifiant" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prenom" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NomFichierPhoto" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IntervenantExterieur" Type="bit" Nullable="false" />
+          <Property Name="Infos" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdCivilite" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Formateur2Formation">
+          <Key>
+            <PropertyRef Name="IdFormateur" />
+            <PropertyRef Name="IdFormation" />
+          </Key>
+          <Property Name="IdFormateur" Type="int" Nullable="false" />
+          <Property Name="IdFormation" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Formation">
+          <Key>
+            <PropertyRef Name="Identifiant" />
+          </Key>
+          <Property Name="Identifiant" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Reference" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Libelle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NombreJours" Type="smallint" Nullable="false" />
+          <Property Name="Prix" Type="smallint" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="IdTheme" Type="int" Nullable="false" />
+          <Property Name="Type" Type="int" />
+          <Property Name="Url" Type="nvarchar" MaxLength="50" />
+          <Property Name="Lieu" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SecteurActivite">
+          <Key>
+            <PropertyRef Name="Identifiant" />
+          </Key>
+          <Property Name="Identifiant" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Libelle" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SessionFormation">
+          <Key>
+            <PropertyRef Name="Identifiant" />
+          </Key>
+          <Property Name="Identifiant" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateDebut" Type="datetime" Nullable="false" />
+          <Property Name="DateFin" Type="datetime" Nullable="false" />
+          <Property Name="Inter" Type="bit" Nullable="false" />
+          <Property Name="IdFormateur" Type="int" Nullable="false" />
+          <Property Name="IdCommercial" Type="int" Nullable="false" />
+          <Property Name="IdFormation" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stagiaire">
+          <Key>
+            <PropertyRef Name="Identifiant" />
+          </Key>
+          <Property Name="Identifiant" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prenom" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdCivilite" Type="int" Nullable="false" />
+          <Property Name="IdClient" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stagiaire2SessionFormation">
+          <Key>
+            <PropertyRef Name="IdSessionFormation" />
+            <PropertyRef Name="IdStagiaire" />
+          </Key>
+          <Property Name="IdSessionFormation" Type="int" Nullable="false" />
+          <Property Name="IdStagiaire" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Theme">
+          <Key>
+            <PropertyRef Name="Identifiant" />
+          </Key>
+          <Property Name="Identifiant" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Libelle" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CiviliteCommercial">
+          <End Role="Civilite" Type="Self.Civilite" Multiplicity="1" />
+          <End Role="Commercial" Type="Self.Commercial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Civilite">
+              <PropertyRef Name="Identifiant" />
+            </Principal>
+            <Dependent Role="Commercial">
+              <PropertyRef Name="IdCivilite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CiviliteFormateur">
+          <End Role="Civilite" Type="Self.Civilite" Multiplicity="1" />
+          <End Role="Formateur" Type="Self.Formateur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Civilite">
+              <PropertyRef Name="Identifiant" />
+            </Principal>
+            <Dependent Role="Formateur">
+              <PropertyRef Name="IdCivilite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CiviliteStagiaire1">
+          <End Role="Civilite" Type="Self.Civilite" Multiplicity="1" />
+          <End Role="Stagiaire" Type="Self.Stagiaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Civilite">
+              <PropertyRef Name="Identifiant" />
+            </Principal>
+            <Dependent Role="Stagiaire">
+              <PropertyRef Name="IdCivilite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CommercialClient">
+          <End Role="Commercial" Type="Self.Commercial" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commercial">
+              <PropertyRef Name="Identifiant" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="IdCommercial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DemandeClientClient">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="DemandeClient" Type="Self.DemandeClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Identifiant" />
+            </Principal>
+            <Dependent Role="DemandeClient">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DemandeClientFormation">
+          <End Role="Formation" Type="Self.Formation" Multiplicity="1" />
+          <End Role="DemandeClient" Type="Self.DemandeClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Formation">
+              <PropertyRef Name="Identifiant" />
+            </Principal>
+            <Dependent Role="DemandeClient">
+              <PropertyRef Name="IdFormation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormateurFormation_Formateur">
+          <End Role="Formateur" Type="Self.Formateur" Multiplicity="1" />
+          <End Role="Formateur2Formation" Type="Self.Formateur2Formation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Formateur">
+              <PropertyRef Name="Identifiant" />
+            </Principal>
+            <Dependent Role="Formateur2Formation">
+              <PropertyRef Name="IdFormateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormateurFormation_Formation">
+          <End Role="Formation" Type="Self.Formation" Multiplicity="1" />
+          <End Role="Formateur2Formation" Type="Self.Formateur2Formation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Formation">
+              <PropertyRef Name="Identifiant" />
+            </Principal>
+            <Dependent Role="Formateur2Formation">
+              <PropertyRef Name="IdFormation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormateurSessionFormation">
+          <End Role="Formateur" Type="Self.Formateur" Multiplicity="1" />
+          <End Role="SessionFormation" Type="Self.SessionFormation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Formateur">
+              <PropertyRef Name="Identifiant" />
+            </Principal>
+            <Dependent Role="SessionFormation">
+              <PropertyRef Name="IdFormateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormationSessionFormation">
+          <End Role="Formation" Type="Self.Formation" Multiplicity="1" />
+          <End Role="SessionFormation" Type="Self.SessionFormation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Formation">
+              <PropertyRef Name="Identifiant" />
+            </Principal>
+            <Dependent Role="SessionFormation">
+              <PropertyRef Name="IdFormation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SecteurActiviteClient">
+          <End Role="SecteurActivite" Type="Self.SecteurActivite" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecteurActivite">
+              <PropertyRef Name="Identifiant" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="IdSecteurActivite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SessionFormationCommercial">
+          <End Role="Commercial" Type="Self.Commercial" Multiplicity="1" />
+          <End Role="SessionFormation" Type="Self.SessionFormation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commercial">
+              <PropertyRef Name="Identifiant" />
+            </Principal>
+            <Dependent Role="SessionFormation">
+              <PropertyRef Name="IdCommercial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SessionFormationStagiaire_Stagiaire">
+          <End Role="Stagiaire" Type="Self.Stagiaire" Multiplicity="1" />
+          <End Role="Stagiaire2SessionFormation" Type="Self.Stagiaire2SessionFormation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stagiaire">
+              <PropertyRef Name="Identifiant" />
+            </Principal>
+            <Dependent Role="Stagiaire2SessionFormation">
+              <PropertyRef Name="IdStagiaire" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StagiaireClient">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Stagiaire" Type="Self.Stagiaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Identifiant" />
+            </Principal>
+            <Dependent Role="Stagiaire">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThemeFormation">
+          <End Role="Theme" Type="Self.Theme" Multiplicity="1" />
+          <End Role="Formation" Type="Self.Formation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Theme">
+              <PropertyRef Name="Identifiant" />
+            </Principal>
+            <Dependent Role="Formation">
+              <PropertyRef Name="IdTheme" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FormationModelStoreContainer">
+          <EntitySet Name="Civilite" EntityType="Self.Civilite" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Commercial" EntityType="Self.Commercial" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DemandeClient" EntityType="Self.DemandeClient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Formateur" EntityType="Self.Formateur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Formateur2Formation" EntityType="Self.Formateur2Formation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Formation" EntityType="Self.Formation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SecteurActivite" EntityType="Self.SecteurActivite" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SessionFormation" EntityType="Self.SessionFormation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stagiaire" EntityType="Self.Stagiaire" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stagiaire2SessionFormation" EntityType="Self.Stagiaire2SessionFormation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Theme" EntityType="Self.Theme" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CiviliteCommercial" Association="Self.FK_CiviliteCommercial">
+            <End Role="Civilite" EntitySet="Civilite" />
+            <End Role="Commercial" EntitySet="Commercial" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CiviliteFormateur" Association="Self.FK_CiviliteFormateur">
+            <End Role="Civilite" EntitySet="Civilite" />
+            <End Role="Formateur" EntitySet="Formateur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CiviliteStagiaire1" Association="Self.FK_CiviliteStagiaire1">
+            <End Role="Civilite" EntitySet="Civilite" />
+            <End Role="Stagiaire" EntitySet="Stagiaire" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CommercialClient" Association="Self.FK_CommercialClient">
+            <End Role="Commercial" EntitySet="Commercial" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DemandeClientClient" Association="Self.FK_DemandeClientClient">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="DemandeClient" EntitySet="DemandeClient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DemandeClientFormation" Association="Self.FK_DemandeClientFormation">
+            <End Role="Formation" EntitySet="Formation" />
+            <End Role="DemandeClient" EntitySet="DemandeClient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormateurFormation_Formateur" Association="Self.FK_FormateurFormation_Formateur">
+            <End Role="Formateur" EntitySet="Formateur" />
+            <End Role="Formateur2Formation" EntitySet="Formateur2Formation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormateurFormation_Formation" Association="Self.FK_FormateurFormation_Formation">
+            <End Role="Formation" EntitySet="Formation" />
+            <End Role="Formateur2Formation" EntitySet="Formateur2Formation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormateurSessionFormation" Association="Self.FK_FormateurSessionFormation">
+            <End Role="Formateur" EntitySet="Formateur" />
+            <End Role="SessionFormation" EntitySet="SessionFormation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormationSessionFormation" Association="Self.FK_FormationSessionFormation">
+            <End Role="Formation" EntitySet="Formation" />
+            <End Role="SessionFormation" EntitySet="SessionFormation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SecteurActiviteClient" Association="Self.FK_SecteurActiviteClient">
+            <End Role="SecteurActivite" EntitySet="SecteurActivite" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SessionFormationCommercial" Association="Self.FK_SessionFormationCommercial">
+            <End Role="Commercial" EntitySet="Commercial" />
+            <End Role="SessionFormation" EntitySet="SessionFormation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SessionFormationStagiaire_Stagiaire" Association="Self.FK_SessionFormationStagiaire_Stagiaire">
+            <End Role="Stagiaire" EntitySet="Stagiaire" />
+            <End Role="Stagiaire2SessionFormation" EntitySet="Stagiaire2SessionFormation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StagiaireClient" Association="Self.FK_StagiaireClient">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Stagiaire" EntitySet="Stagiaire" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThemeFormation" Association="Self.FK_ThemeFormation">
+            <End Role="Theme" EntitySet="Theme" />
+            <End Role="Formation" EntitySet="Formation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FormationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Civilite">
+          <Key>
+            <PropertyRef Name="Identifiant" />
+          </Key>
+          <Property Name="Identifiant" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LibelleCourt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LibelleLong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Commercial" Relationship="Self.FK_CiviliteCommercial" FromRole="Civilite" ToRole="Commercial" />
+          <NavigationProperty Name="Formateur" Relationship="Self.FK_CiviliteFormateur" FromRole="Civilite" ToRole="Formateur" />
+          <NavigationProperty Name="Stagiaire" Relationship="Self.FK_CiviliteStagiaire1" FromRole="Civilite" ToRole="Stagiaire" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Identifiant" />
+          </Key>
+          <Property Name="Identifiant" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Reference" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RaisonSociale" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Adresse" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CodePostal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ville" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UrlSiteWeb" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MotDePasse" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdCommercial" Type="Int32" Nullable="false" />
+          <Property Name="IdSecteurActivite" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Commercial" Relationship="Self.FK_CommercialClient" FromRole="Client" ToRole="Commercial" />
+          <NavigationProperty Name="DemandeClient" Relationship="Self.FK_DemandeClientClient" FromRole="Client" ToRole="DemandeClient" />
+          <NavigationProperty Name="SecteurActivite" Relationship="Self.FK_SecteurActiviteClient" FromRole="Client" ToRole="SecteurActivite" />
+          <NavigationProperty Name="Stagiaire" Relationship="Self.FK_StagiaireClient" FromRole="Client" ToRole="Stagiaire" />
+        </EntityType>
+        <EntityType Name="Commercial">
+          <Key>
+            <PropertyRef Name="Identifiant" />
+          </Key>
+          <Property Name="Identifiant" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomUtilisateur" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MotDePasse" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdCivilite" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Civilite" Relationship="Self.FK_CiviliteCommercial" FromRole="Commercial" ToRole="Civilite" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_CommercialClient" FromRole="Commercial" ToRole="Client" />
+          <NavigationProperty Name="SessionFormation" Relationship="Self.FK_SessionFormationCommercial" FromRole="Commercial" ToRole="SessionFormation" />
+        </EntityType>
+        <EntityType Name="DemandeClient">
+          <Key>
+            <PropertyRef Name="Identifiant" />
+          </Key>
+          <Property Name="Identifiant" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateDemande" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateTraitement" Type="DateTime" Precision="3" />
+          <Property Name="IdFormation" Type="Int32" Nullable="false" />
+          <Property Name="IdClient" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_DemandeClientClient" FromRole="DemandeClient" ToRole="Client" />
+          <NavigationProperty Name="Formation" Relationship="Self.FK_DemandeClientFormation" FromRole="DemandeClient" ToRole="Formation" />
+        </EntityType>
+        <EntityType Name="Formateur">
+          <Key>
+            <PropertyRef Name="Identifiant" />
+          </Key>
+          <Property Name="Identifiant" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NomFichierPhoto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IntervenantExterieur" Type="Boolean" Nullable="false" />
+          <Property Name="Infos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdCivilite" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Civilite" Relationship="Self.FK_CiviliteFormateur" FromRole="Formateur" ToRole="Civilite" />
+          <NavigationProperty Name="SessionFormation" Relationship="Self.FK_FormateurSessionFormation" FromRole="Formateur" ToRole="SessionFormation" />
+          <NavigationProperty Name="Formation" Relationship="Self.Formateur2Formation" FromRole="Formateur" ToRole="Formation" />
+        </EntityType>
+        <EntityType Name="Formation">
+          <Key>
+            <PropertyRef Name="Identifiant" />
+          </Key>
+          <Property Name="Identifiant" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Reference" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NombreJours" Type="Int16" Nullable="false" />
+          <Property Name="Prix" Type="Int16" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdTheme" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lieu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DemandeClient" Relationship="Self.FK_DemandeClientFormation" FromRole="Formation" ToRole="DemandeClient" />
+          <NavigationProperty Name="SessionFormation" Relationship="Self.FK_FormationSessionFormation" FromRole="Formation" ToRole="SessionFormation" />
+          <NavigationProperty Name="Theme" Relationship="Self.FK_ThemeFormation" FromRole="Formation" ToRole="Theme" />
+          <NavigationProperty Name="Formateur" Relationship="Self.Formateur2Formation" FromRole="Formation" ToRole="Formateur" />
+        </EntityType>
+        <EntityType Name="SecteurActivite">
+          <Key>
+            <PropertyRef Name="Identifiant" />
+          </Key>
+          <Property Name="Identifiant" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_SecteurActiviteClient" FromRole="SecteurActivite" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="SessionFormation">
+          <Key>
+            <PropertyRef Name="Identifiant" />
+          </Key>
+          <Property Name="Identifiant" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateDebut" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateFin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Inter" Type="Boolean" Nullable="false" />
+          <Property Name="IdFormateur" Type="Int32" Nullable="false" />
+          <Property Name="IdCommercial" Type="Int32" Nullable="false" />
+          <Property Name="IdFormation" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Commercial" Relationship="Self.FK_SessionFormationCommercial" FromRole="SessionFormation" ToRole="Commercial" />
+          <NavigationProperty Name="Formateur" Relationship="Self.FK_FormateurSessionFormation" FromRole="SessionFormation" ToRole="Formateur" />
+          <NavigationProperty Name="Formation" Relationship="Self.FK_FormationSessionFormation" FromRole="SessionFormation" ToRole="Formation" />
+        </EntityType>
+        <EntityType Name="Stagiaire">
+          <Key>
+            <PropertyRef Name="Identifiant" />
+          </Key>
+          <Property Name="Identifiant" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdCivilite" Type="Int32" Nullable="false" />
+          <Property Name="IdClient" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Civilite" Relationship="Self.FK_CiviliteStagiaire1" FromRole="Stagiaire" ToRole="Civilite" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_StagiaireClient" FromRole="Stagiaire" ToRole="Client" />
+          <NavigationProperty Name="Stagiaire2SessionFormation" Relationship="Self.FK_SessionFormationStagiaire_Stagiaire" FromRole="Stagiaire" ToRole="Stagiaire2SessionFormation" />
+        </EntityType>
+        <EntityType Name="Stagiaire2SessionFormation">
+          <Key>
+            <PropertyRef Name="IdSessionFormation" />
+            <PropertyRef Name="IdStagiaire" />
+          </Key>
+          <Property Name="IdSessionFormation" Type="Int32" Nullable="false" />
+          <Property Name="IdStagiaire" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Stagiaire" Relationship="Self.FK_SessionFormationStagiaire_Stagiaire" FromRole="Stagiaire2SessionFormation" ToRole="Stagiaire" />
+        </EntityType>
+        <EntityType Name="Theme">
+          <Key>
+            <PropertyRef Name="Identifiant" />
+          </Key>
+          <Property Name="Identifiant" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Formation" Relationship="Self.FK_ThemeFormation" FromRole="Theme" ToRole="Formation" />
+        </EntityType>
+        <Association Name="FK_CiviliteCommercial">
+          <End Role="Civilite" Type="Self.Civilite" Multiplicity="1" />
+          <End Role="Commercial" Type="Self.Commercial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Civilite">
+              <PropertyRef Name="Identifiant" />
+            </Principal>
+            <Dependent Role="Commercial">
+              <PropertyRef Name="IdCivilite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CiviliteFormateur">
+          <End Role="Civilite" Type="Self.Civilite" Multiplicity="1" />
+          <End Role="Formateur" Type="Self.Formateur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Civilite">
+              <PropertyRef Name="Identifiant" />
+            </Principal>
+            <Dependent Role="Formateur">
+              <PropertyRef Name="IdCivilite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CiviliteStagiaire1">
+          <End Role="Civilite" Type="Self.Civilite" Multiplicity="1" />
+          <End Role="Stagiaire" Type="Self.Stagiaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Civilite">
+              <PropertyRef Name="Identifiant" />
+            </Principal>
+            <Dependent Role="Stagiaire">
+              <PropertyRef Name="IdCivilite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CommercialClient">
+          <End Role="Commercial" Type="Self.Commercial" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commercial">
+              <PropertyRef Name="Identifiant" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="IdCommercial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DemandeClientClient">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="DemandeClient" Type="Self.DemandeClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Identifiant" />
+            </Principal>
+            <Dependent Role="DemandeClient">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SecteurActiviteClient">
+          <End Role="SecteurActivite" Type="Self.SecteurActivite" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecteurActivite">
+              <PropertyRef Name="Identifiant" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="IdSecteurActivite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StagiaireClient">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Stagiaire" Type="Self.Stagiaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Identifiant" />
+            </Principal>
+            <Dependent Role="Stagiaire">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SessionFormationCommercial">
+          <End Role="Commercial" Type="Self.Commercial" Multiplicity="1" />
+          <End Role="SessionFormation" Type="Self.SessionFormation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commercial">
+              <PropertyRef Name="Identifiant" />
+            </Principal>
+            <Dependent Role="SessionFormation">
+              <PropertyRef Name="IdCommercial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DemandeClientFormation">
+          <End Role="Formation" Type="Self.Formation" Multiplicity="1" />
+          <End Role="DemandeClient" Type="Self.DemandeClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Formation">
+              <PropertyRef Name="Identifiant" />
+            </Principal>
+            <Dependent Role="DemandeClient">
+              <PropertyRef Name="IdFormation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormateurSessionFormation">
+          <End Role="Formateur" Type="Self.Formateur" Multiplicity="1" />
+          <End Role="SessionFormation" Type="Self.SessionFormation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Formateur">
+              <PropertyRef Name="Identifiant" />
+            </Principal>
+            <Dependent Role="SessionFormation">
+              <PropertyRef Name="IdFormateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormationSessionFormation">
+          <End Role="Formation" Type="Self.Formation" Multiplicity="1" />
+          <End Role="SessionFormation" Type="Self.SessionFormation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Formation">
+              <PropertyRef Name="Identifiant" />
+            </Principal>
+            <Dependent Role="SessionFormation">
+              <PropertyRef Name="IdFormation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThemeFormation">
+          <End Role="Theme" Type="Self.Theme" Multiplicity="1" />
+          <End Role="Formation" Type="Self.Formation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Theme">
+              <PropertyRef Name="Identifiant" />
+            </Principal>
+            <Dependent Role="Formation">
+              <PropertyRef Name="IdTheme" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SessionFormationStagiaire_Stagiaire">
+          <End Role="Stagiaire" Type="Self.Stagiaire" Multiplicity="1" />
+          <End Role="Stagiaire2SessionFormation" Type="Self.Stagiaire2SessionFormation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stagiaire">
+              <PropertyRef Name="Identifiant" />
+            </Principal>
+            <Dependent Role="Stagiaire2SessionFormation">
+              <PropertyRef Name="IdStagiaire" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Formateur2Formation">
+          <End Role="Formateur" Type="Self.Formateur" Multiplicity="*" />
+          <End Role="Formation" Type="Self.Formation" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="FormationEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Civilite" EntityType="Self.Civilite" />
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="Commercial" EntityType="Self.Commercial" />
+          <EntitySet Name="DemandeClient" EntityType="Self.DemandeClient" />
+          <EntitySet Name="Formateur" EntityType="Self.Formateur" />
+          <EntitySet Name="Formation" EntityType="Self.Formation" />
+          <EntitySet Name="SecteurActivite" EntityType="Self.SecteurActivite" />
+          <EntitySet Name="SessionFormation" EntityType="Self.SessionFormation" />
+          <EntitySet Name="Stagiaire" EntityType="Self.Stagiaire" />
+          <EntitySet Name="Stagiaire2SessionFormation" EntityType="Self.Stagiaire2SessionFormation" />
+          <EntitySet Name="Theme" EntityType="Self.Theme" />
+          <AssociationSet Name="FK_CiviliteCommercial" Association="Self.FK_CiviliteCommercial">
+            <End Role="Civilite" EntitySet="Civilite" />
+            <End Role="Commercial" EntitySet="Commercial" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CiviliteFormateur" Association="Self.FK_CiviliteFormateur">
+            <End Role="Civilite" EntitySet="Civilite" />
+            <End Role="Formateur" EntitySet="Formateur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CiviliteStagiaire1" Association="Self.FK_CiviliteStagiaire1">
+            <End Role="Civilite" EntitySet="Civilite" />
+            <End Role="Stagiaire" EntitySet="Stagiaire" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CommercialClient" Association="Self.FK_CommercialClient">
+            <End Role="Commercial" EntitySet="Commercial" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DemandeClientClient" Association="Self.FK_DemandeClientClient">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="DemandeClient" EntitySet="DemandeClient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SecteurActiviteClient" Association="Self.FK_SecteurActiviteClient">
+            <End Role="SecteurActivite" EntitySet="SecteurActivite" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StagiaireClient" Association="Self.FK_StagiaireClient">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Stagiaire" EntitySet="Stagiaire" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SessionFormationCommercial" Association="Self.FK_SessionFormationCommercial">
+            <End Role="Commercial" EntitySet="Commercial" />
+            <End Role="SessionFormation" EntitySet="SessionFormation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DemandeClientFormation" Association="Self.FK_DemandeClientFormation">
+            <End Role="Formation" EntitySet="Formation" />
+            <End Role="DemandeClient" EntitySet="DemandeClient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormateurSessionFormation" Association="Self.FK_FormateurSessionFormation">
+            <End Role="Formateur" EntitySet="Formateur" />
+            <End Role="SessionFormation" EntitySet="SessionFormation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormationSessionFormation" Association="Self.FK_FormationSessionFormation">
+            <End Role="Formation" EntitySet="Formation" />
+            <End Role="SessionFormation" EntitySet="SessionFormation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThemeFormation" Association="Self.FK_ThemeFormation">
+            <End Role="Theme" EntitySet="Theme" />
+            <End Role="Formation" EntitySet="Formation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SessionFormationStagiaire_Stagiaire" Association="Self.FK_SessionFormationStagiaire_Stagiaire">
+            <End Role="Stagiaire" EntitySet="Stagiaire" />
+            <End Role="Stagiaire2SessionFormation" EntitySet="Stagiaire2SessionFormation" />
+          </AssociationSet>
+          <AssociationSet Name="Formateur2Formation" Association="Self.Formateur2Formation">
+            <End Role="Formateur" EntitySet="Formateur" />
+            <End Role="Formation" EntitySet="Formation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FormationModelStoreContainer" CdmEntityContainer="FormationEntities">
+          <EntitySetMapping Name="Civilite">
+            <EntityTypeMapping TypeName="FormationModel.Civilite">
+              <MappingFragment StoreEntitySet="Civilite">
+                <ScalarProperty Name="Identifiant" ColumnName="Identifiant" />
+                <ScalarProperty Name="LibelleCourt" ColumnName="LibelleCourt" />
+                <ScalarProperty Name="LibelleLong" ColumnName="LibelleLong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="FormationModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="Identifiant" ColumnName="Identifiant" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="RaisonSociale" ColumnName="RaisonSociale" />
+                <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+                <ScalarProperty Name="CodePostal" ColumnName="CodePostal" />
+                <ScalarProperty Name="Ville" ColumnName="Ville" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UrlSiteWeb" ColumnName="UrlSiteWeb" />
+                <ScalarProperty Name="MotDePasse" ColumnName="MotDePasse" />
+                <ScalarProperty Name="IdCommercial" ColumnName="IdCommercial" />
+                <ScalarProperty Name="IdSecteurActivite" ColumnName="IdSecteurActivite" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Commercial">
+            <EntityTypeMapping TypeName="FormationModel.Commercial">
+              <MappingFragment StoreEntitySet="Commercial">
+                <ScalarProperty Name="Identifiant" ColumnName="Identifiant" />
+                <ScalarProperty Name="NomUtilisateur" ColumnName="NomUtilisateur" />
+                <ScalarProperty Name="MotDePasse" ColumnName="MotDePasse" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="IdCivilite" ColumnName="IdCivilite" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DemandeClient">
+            <EntityTypeMapping TypeName="FormationModel.DemandeClient">
+              <MappingFragment StoreEntitySet="DemandeClient">
+                <ScalarProperty Name="Identifiant" ColumnName="Identifiant" />
+                <ScalarProperty Name="DateDemande" ColumnName="DateDemande" />
+                <ScalarProperty Name="DateTraitement" ColumnName="DateTraitement" />
+                <ScalarProperty Name="IdFormation" ColumnName="IdFormation" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Formateur">
+            <EntityTypeMapping TypeName="FormationModel.Formateur">
+              <MappingFragment StoreEntitySet="Formateur">
+                <ScalarProperty Name="Identifiant" ColumnName="Identifiant" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="NomFichierPhoto" ColumnName="NomFichierPhoto" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="IntervenantExterieur" ColumnName="IntervenantExterieur" />
+                <ScalarProperty Name="Infos" ColumnName="Infos" />
+                <ScalarProperty Name="IdCivilite" ColumnName="IdCivilite" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Formation">
+            <EntityTypeMapping TypeName="FormationModel.Formation">
+              <MappingFragment StoreEntitySet="Formation">
+                <ScalarProperty Name="Identifiant" ColumnName="Identifiant" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+                <ScalarProperty Name="NombreJours" ColumnName="NombreJours" />
+                <ScalarProperty Name="Prix" ColumnName="Prix" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IdTheme" ColumnName="IdTheme" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Lieu" ColumnName="Lieu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SecteurActivite">
+            <EntityTypeMapping TypeName="FormationModel.SecteurActivite">
+              <MappingFragment StoreEntitySet="SecteurActivite">
+                <ScalarProperty Name="Identifiant" ColumnName="Identifiant" />
+                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SessionFormation">
+            <EntityTypeMapping TypeName="FormationModel.SessionFormation">
+              <MappingFragment StoreEntitySet="SessionFormation">
+                <ScalarProperty Name="Identifiant" ColumnName="Identifiant" />
+                <ScalarProperty Name="DateDebut" ColumnName="DateDebut" />
+                <ScalarProperty Name="DateFin" ColumnName="DateFin" />
+                <ScalarProperty Name="Inter" ColumnName="Inter" />
+                <ScalarProperty Name="IdFormateur" ColumnName="IdFormateur" />
+                <ScalarProperty Name="IdCommercial" ColumnName="IdCommercial" />
+                <ScalarProperty Name="IdFormation" ColumnName="IdFormation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stagiaire">
+            <EntityTypeMapping TypeName="FormationModel.Stagiaire">
+              <MappingFragment StoreEntitySet="Stagiaire">
+                <ScalarProperty Name="Identifiant" ColumnName="Identifiant" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="IdCivilite" ColumnName="IdCivilite" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stagiaire2SessionFormation">
+            <EntityTypeMapping TypeName="FormationModel.Stagiaire2SessionFormation">
+              <MappingFragment StoreEntitySet="Stagiaire2SessionFormation">
+                <ScalarProperty Name="IdSessionFormation" ColumnName="IdSessionFormation" />
+                <ScalarProperty Name="IdStagiaire" ColumnName="IdStagiaire" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Theme">
+            <EntityTypeMapping TypeName="FormationModel.Theme">
+              <MappingFragment StoreEntitySet="Theme">
+                <ScalarProperty Name="Identifiant" ColumnName="Identifiant" />
+                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Formateur2Formation" TypeName="FormationModel.Formateur2Formation" StoreEntitySet="Formateur2Formation">
+            <EndProperty Name="Formateur">
+              <ScalarProperty Name="Identifiant" ColumnName="IdFormateur" />
+            </EndProperty>
+            <EndProperty Name="Formation">
+              <ScalarProperty Name="Identifiant" ColumnName="IdFormation" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
